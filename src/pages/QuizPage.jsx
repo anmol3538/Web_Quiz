@@ -54,6 +54,7 @@ const QuizPage = () => {
     }, 1000)
 
     return () => clearInterval(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft, questions.length, selectedAnswers, email, navigate])
 
 
@@ -173,19 +174,19 @@ const QuizPage = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
       {/* Header */}
-      <div className="bg-gray-800 border-b border-gray-700 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="bg-gray-800 border-b border-gray-700 px-4 sm:px-6 py-3 sm:py-4">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-white">MCQ Quiz</h1>
-            <p className="text-gray-400">Welcome, {email}</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-white">MCQ Quiz</h1>
+            <p className="text-gray-400 text-sm sm:text-base">Welcome, {email}</p>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
             <div className="text-right">
-              <div className="text-2xl font-bold text-blue-400 font-mono">
+              <div className="text-xl sm:text-2xl font-bold text-blue-400 font-mono">
                 {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
               </div>
-              <div className="text-sm text-gray-400">Time Remaining</div>
-              <div className="w-32 bg-gray-700 rounded-full h-2 mt-2">
+              <div className="text-xs sm:text-sm text-gray-400">Time Remaining</div>
+              <div className="w-28 sm:w-32 bg-gray-700 rounded-full h-2 mt-2">
                 <div 
                   className={`h-2 rounded-full transition-all duration-1000 ${
                     timeLeft < 300 ? 'bg-red-500' : timeLeft < 600 ? 'bg-yellow-500' : 'bg-blue-500'
@@ -196,7 +197,7 @@ const QuizPage = () => {
             </div>
             <button
               onClick={() => navigate('/email-verified')}
-              className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+              className="bg-gray-600 hover:bg-gray-700 text-white px-3 sm:px-4 py-2 rounded-lg text-sm transition-colors whitespace-nowrap"
             >
               Exit Quiz
             </button>
@@ -204,18 +205,18 @@ const QuizPage = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           {/* Left Sidebar - Question Navigation */}
           <div className="lg:col-span-1">
-            <div className="bg-gray-800 rounded-lg shadow-xl p-6 border border-gray-700">
-              <h3 className="text-lg font-semibold text-white mb-4">Question Navigation</h3>
-              <div className="grid grid-cols-5 lg:grid-cols-3 gap-2">
+            <div className="bg-gray-800 rounded-lg shadow-xl p-4 sm:p-6 border border-gray-700">
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Question Navigation</h3>
+              <div className="grid grid-cols-6 sm:grid-cols-5 lg:grid-cols-3 gap-2">
                 {questions.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => handleQuestionNavigation(index)}
-                    className={`w-10 h-10 rounded-lg font-medium transition-all ${
+                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg font-medium transition-all ${
                       index === currentQuestionIndex
                         ? 'bg-blue-600 text-white shadow-lg transform scale-110'
                         : selectedAnswers[index]
@@ -228,7 +229,7 @@ const QuizPage = () => {
                 ))}
               </div>
               
-              <div className="mt-6 space-y-2 text-sm">
+              <div className="mt-5 sm:mt-6 space-y-2 text-xs sm:text-sm">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-green-500 rounded"></div>
                   <span className="text-gray-300">Answered</span>
@@ -244,14 +245,14 @@ const QuizPage = () => {
               </div>
 
               {/* Progress Stats */}
-              <div className="mt-6 grid grid-cols-2 gap-4 text-center">
+              <div className="mt-5 sm:mt-6 grid grid-cols-2 gap-4 text-center">
                 <div className="bg-gray-700 rounded-lg p-3">
-                  <div className="text-2xl font-bold text-green-400">{Object.keys(selectedAnswers).length}</div>
-                  <div className="text-gray-400 text-sm">Answered</div>
+                  <div className="text-xl sm:text-2xl font-bold text-green-400">{Object.keys(selectedAnswers).length}</div>
+                  <div className="text-gray-400 text-xs sm:text-sm">Answered</div>
                 </div>
                 <div className="bg-gray-700 rounded-lg p-3">
-                  <div className="text-2xl font-bold text-gray-400">{questions.length - Object.keys(selectedAnswers).length}</div>
-                  <div className="text-gray-400 text-sm">Remaining</div>
+                  <div className="text-xl sm:text-2xl font-bold text-gray-400">{questions.length - Object.keys(selectedAnswers).length}</div>
+                  <div className="text-gray-400 text-xs sm:text-sm">Remaining</div>
                 </div>
               </div>
             </div>
@@ -260,21 +261,21 @@ const QuizPage = () => {
           {/* Main Content Area */}
           <div className="lg:col-span-3">
             {currentQuestion && (
-              <div className="bg-gray-800 rounded-lg shadow-xl p-8 border border-gray-700">
+              <div className="bg-gray-800 rounded-lg shadow-xl p-5 sm:p-8 border border-gray-700">
                 {/* Question Header */}
                 <div className="mb-6">
                   <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-white">Question {currentQuestionIndex + 1}</h2>
-                    <span className="text-sm text-gray-400 bg-gray-700 px-3 py-1 rounded-full">
+                    <h2 className="text-xl sm:text-2xl font-bold text-white">Question {currentQuestionIndex + 1}</h2>
+                    <span className="text-xs sm:text-sm text-gray-400 bg-gray-700 px-3 py-1 rounded-full">
                       {currentQuestionIndex + 1} of {questions.length}
                     </span>
                   </div>
                   
-                  <div className="flex gap-3 mb-4">
-                    <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <div className="flex items-center justify-between mb-4 gap-3">
+                    <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs sm:text-sm font-medium min-w-0 truncate">
                       {decodeHtml(currentQuestion.category)}
                     </span>
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                    <span className={`px-3 py-1 rounded-full text-xs sm:text-sm font-medium flex-shrink-0 ${
                       currentQuestion.difficulty === 'easy' ? 'bg-green-600 text-white' :
                       currentQuestion.difficulty === 'medium' ? 'bg-yellow-600 text-white' :
                       'bg-red-600 text-white'
@@ -285,7 +286,7 @@ const QuizPage = () => {
                 </div>
 
                 {/* Question Text */}
-                <div className="text-xl font-semibold text-gray-100 mb-8 leading-relaxed">
+                <div className="text-lg sm:text-xl font-semibold text-gray-100 mb-6 sm:mb-8 leading-relaxed">
                   {decodeHtml(currentQuestion.question)}
                 </div>
 
@@ -300,7 +301,7 @@ const QuizPage = () => {
                     return allAnswers.map((answer, index) => (
                       <div
                         key={`${currentQuestionIndex}-${index}`}
-                        className={`p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
+                        className={`p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 break-words ${
                           selectedAnswers[currentQuestionIndex] === answer
                             ? 'border-blue-500 bg-blue-900/30 shadow-md'
                             : 'border-gray-600 hover:border-blue-400 hover:bg-gray-700/50'
@@ -325,11 +326,11 @@ const QuizPage = () => {
                 </div>
 
                 {/* Navigation Buttons */}
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3">
                   <button
                     onClick={handlePrevious}
                     disabled={isFirstQuestion}
-                    className={`flex items-center px-6 py-3 rounded-lg font-medium transition-all ${
+                    className={`flex items-center px-6 py-3 rounded-lg font-medium transition-all w-full sm:w-auto ${
                       isFirstQuestion
                         ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
                         : 'bg-gray-600 hover:bg-gray-500 text-white shadow hover:shadow-md'
@@ -343,7 +344,7 @@ const QuizPage = () => {
                   
                   <button
                     onClick={handleNext}
-                    className="flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+                    className="flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all w-full sm:w-auto"
                   >
                     {isLastQuestion ? 'Finish Quiz' : 'Next'}
                     <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -161,7 +161,7 @@ The application uses the OpenTDB API with the following configuration:
   - Yellow: 5-10 minutes remaining
   - Red: < 5 minutes remaining
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 

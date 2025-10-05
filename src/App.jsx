@@ -10,7 +10,7 @@ function App() {
   return (
     <EmailProvider>
       <Router>
-        <div className="App bg-gray-900 min-h-screen">
+        <div className="App">
           <Routes>
             <Route path="/" element={<Navigate to="/email" replace />} />
             <Route path="/email" element={<EmailForm />} />
