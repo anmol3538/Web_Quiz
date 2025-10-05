@@ -7,8 +7,7 @@ const QuestionCard = ({
   selectedAnswer, 
   onAnswerSelect 
 }) => {
-  // Debug logging for each question
-  console.log(`Question ${questionNumber} data:`, question);
+  
   
   // Helper function to decode HTML entities
   const decodeHtml = (html) => {

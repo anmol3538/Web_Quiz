@@ -6,7 +6,6 @@ export const fetchQuizQuestions = async () => {
     await new Promise(resolve => setTimeout(resolve, 500));
     
     const response = await axios.get('https://opentdb.com/api.php?amount=15&type=multiple');
-    console.log('API Response:', response.data);
     
     if (response.data.response_code !== 0) {
       throw new Error('Failed to fetch questions from API');
@@ -22,8 +21,7 @@ export const fetchQuizQuestions = async () => {
       incorrectAnswers: question.incorrect_answers || question.incorrect_answer || []
     }));
     
-    console.log('Original Questions (from API):', response.data.results);
-    console.log('Transformed Questions (for display):', transformedQuestions);
+    
     
     return transformedQuestions;
   } catch (error) {

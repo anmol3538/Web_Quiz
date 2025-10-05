@@ -17,7 +17,6 @@ export const useQuizApi = (email) => {
     
     try {
       const data = await fetchQuizQuestions();
-      console.log('Manual retry - Questions stored:', data);
       setQuestions(data);
       setRetryCount(0);
       hasFetched.current = true;
@@ -43,7 +42,6 @@ export const useQuizApi = (email) => {
         setError(null);
         
         const data = await fetchQuizQuestions();
-        console.log('Questions stored in state:', data);
         setQuestions(data);
         setRetryCount(0);
       } catch (err) {
