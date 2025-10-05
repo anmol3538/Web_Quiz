@@ -11,12 +11,18 @@ const QuizPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [selectedAnswers, setSelectedAnswers] = useState({})
   const [timeLeft, setTimeLeft] = useState(30 * 60)
+  const [visitedQuestions, setVisitedQuestions] = useState({})
 
   useEffect(() => {
     if (!email) {
       navigate('/email')
     }
   }, [email, navigate])
+
+  // Mark current question as visited whenever it changes
+  useEffect(() => {
+    setVisitedQuestions(prev => ({ ...prev, [currentQuestionIndex]: true }))
+  }, [currentQuestionIndex])
 
   // Timer countdown effect
   useEffect(() => {
@@ -217,10 +223,12 @@ const QuizPage = () => {
                     key={index}
                     onClick={() => handleQuestionNavigation(index)}
                     className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg font-medium transition-all ${
-                      index === currentQuestionIndex
-                        ? 'bg-blue-600 text-white shadow-lg transform scale-110'
-                        : selectedAnswers[index]
+                      selectedAnswers[index]
                         ? 'bg-green-600 text-white shadow'
+                        : index === currentQuestionIndex
+                        ? 'bg-blue-600 text-white shadow-lg transform scale-110'
+                        : visitedQuestions[index]
+                        ? 'bg-blue-600 text-white shadow'
                         : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                     }`}
                   >
@@ -236,7 +244,7 @@ const QuizPage = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-blue-500 rounded"></div>
-                  <span className="text-gray-300">Current</span>
+                  <span className="text-gray-300">Visited</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-gray-600 rounded"></div>
